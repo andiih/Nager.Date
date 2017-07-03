@@ -199,6 +199,20 @@ namespace Nager.Date
             return provider?.Get(year);
         }
 
+        /// <summary>
+        /// Overload of getPublicHoliday that takes a county code to allow regional filtering
+        /// </summary>
+        /// <param name="countryCode">ISO 3166-1 ALPHA-2</param>
+        /// <param name="startDate">start of date range</param>
+        /// <param name="endDate">end of date range</param>
+        /// <param name="countyCode">county or region code</param>
+        /// <returns>Public Holidays with no or matching county code</returns>
+        public static IEnumerable<PublicHoliday> GetPublicHoliday(CountryCode countryCode, DateTime startDate, DateTime endDate, string countyCode)
+        {
+            var items = GetPublicHoliday(countryCode, startDate, endDate);
+            return items.Where(o => o.Counties == null || o.Counties.Contains(countyCode));
+        }
+
         public static IEnumerable<PublicHoliday> GetPublicHoliday(string countryCode, DateTime startDate, DateTime endDate)
         {
             CountryCode parsedCountryCode;
