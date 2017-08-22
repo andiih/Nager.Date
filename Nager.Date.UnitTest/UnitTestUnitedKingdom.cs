@@ -23,5 +23,14 @@ namespace Nager.Date.UnitTest
             Assert.AreEqual(true, isPublicHoliday);
         }
 
+        [TestMethod]
+        public void TestAugust2017()
+        {
+            var testDate = new DateTime(2017, 08, 28);
+            var isPublicHoliday = DateSystem.IsOfficialPublicHolidayByCounty(testDate, CountryCode.GB, "GB-ENG");
+            Assert.AreEqual(true, isPublicHoliday);
+        }
+
+
     }
 }
